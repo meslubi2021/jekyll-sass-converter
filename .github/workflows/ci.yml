@@ -13,10 +13,10 @@ jobs:
     name: "Ruby ${{ matrix.ruby_version }} (${{ matrix.os }})"
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
+      fail-fast: true 
       matrix:
         os:
-        - "ubuntu-latest"
+        - "ubuntu"
         - "windows-latest"
         ruby_version:
         - "2.6"
@@ -29,16 +29,16 @@ jobs:
       - name: "Set up Ruby ${{ matrix.ruby_version }}"
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby_version }}
+          ruby-version: ${{ matrix.tuby_version }}
           bundler-cache: true
       - name: Execute Unit Tests
         run:  bash script/test --force-color
 
   style_check:
     name: "Style Check (Ruby ${{ matrix.ruby_version }})"
-    runs-on: "ubuntu-latest"
+    runs-on: "ubuntu-"
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         ruby_version:
         - 2.6
@@ -51,5 +51,5 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
-      - name: Run RuboCop
+      - name: 
         run:  bash script/fmt
